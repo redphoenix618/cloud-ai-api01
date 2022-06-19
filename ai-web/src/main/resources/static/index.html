@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<script src="/js/jquery-3.6.0.min.js"></script>
+    <div id="loading"></div>
+    <form id="form1" onsubmit="return false" action="##" class="form-horizontal" >
+        <h1 class="moveright"> 音转文测试 </h1>
+        <div class="form-group">
+            <label for="cloudType" class="col-sm-2 control-label">云厂商:</label>
+            <div class="col-sm-4">
+                <select name="cloudType" id="cloudType" class="form-control" >
+                    <option value="1">阿里云</option>
+                    <option value="2">百度云</option>
+                    <option value="3">华为云</option>
+                    <option value="4">科大讯飞</option>
+                    <option value="5">腾讯云</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="filePath" class="col-sm-2 control-label">录音文件地址:</label>
+            <div class="col-sm-4">
+                <input name="filePath" type="text" class="form-control" id="filePath" placeholder="请输入文件路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default" onclick="test()">开始测试</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div id="errorDiv"  class="showcontent moveright" style="color: red;font-size: 20px" ></div>
+    <div id="showContent" class="showcontent moveright" >
+        <h2 >测试结果展示</h2>
+
+        <div >
+            <label >花费时间(ms):</label>
+            <div  id="costTime" class="divstyle" ></div>
+        </div>
+        <div>
+            <label >转译后文件内容:</label>
+            <div  id="result" class="divstyle" ></div>
+        </div>
+        <div>
+            <label >原文件内容:</label>
+            <div  id="sourceResult" class="divstyle" ></div>
+        </div>
+    </div>
+
+    <div class="modal">
+    </div>
+</body>
+
+<script>
+    function test() {
+        $(document).ajaxStart(function() {
+            $("body").addClass("loading");
+        })
+            .ajaxStop(function() {
+                $("body").removeClass("loading");
+            });
+
+        $.ajax({
+            dataType:"json",
+            url:"/transfer",
+            data:$('#form1').serialize(),
+            type:"post",
+            success:function (result) {
+                if (result.code == '200'){
+                    $('#showContent').show();
+                    $('#costTime').text(result.data.costTime)
+                    $('#result').text(result.data.content)
+                    if (result.data.fileType == 1){
+                        // 足球解说源文件
+                        $('#sourceResult').text('自古打天下难，守天下更难，没有人可以永远站在顶峰，即使你可以做到居安思危，未雨绸缪，但是你身边全都是和你当年一样充满野心，充满激情和充满渴望的年轻人，他们把你的长处和短处放在显微镜下去研究，以你为标靶，你说你守天下难不难？人生当中成功只是一时的，失败却是主旋律，但是如何面对失败却把人分成了不同的样子，有的人会被失败击垮，有的人能够不断的爬起来继续向前。我想真正的成熟应该并不是追求完美，而是直面自己的缺憾，这才是生活的本质。罗曼罗兰说过的，这个世上只有一种真正的英雄主义，那就是认清生活的真相，并且仍然热爱他。西班牙队从头再来吧，难道向上攀爬的那条路不是比站在顶峰更让人热血澎湃吗？');
+                    }else {
+                        // 录制源文件
+                        $('#sourceResult').text('习惯，是一种力量，潜移默化的影响人的未来。好的习惯犹如春日里的微风细雨，虽然悄无声息，却能在不经意间让绿色铺满大地，而坏习惯则像是树干里的蛀虫，虽然从外面看起来不痛不痒，可时间久了便会从骨子里开始腐朽。');
+                    }
+                }
+            },
+            error:function (request,status,error) {
+                $('#errorDiv').show();
+                $('#errorDiv').append(request.responseJSON.error)
+            }
+        })
+    }
+
+</script>
+<style>
+    .showcontent {
+        /* 隐藏 */
+        display: none;
+        /* 显示 */
+        /* display: block; */
+    }
+    .moveright {
+        margin-left:30px
+    }
+    .divstyle{
+        width: 500px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba( 255, 255, 255, .8) url('/pic/load.gif') 50% 50% no-repeat;
+    }
+
+    body.loading .modal {
+        display: block;
+        overflow: hidden;
+    }
+</style>
+</html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>cloud-ai-api</artifactId>
+    <groupId>com.xyy</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ai-web</artifactId>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.3.10.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.80</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.xyy</groupId>
+      <artifactId>yun-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--阿里云配置 start  -->
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>3.7.1</version>
+    </dependency>
+    <!-- end  -->
+
+    <!--百度云配置 start  -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.13</version>
+    </dependency>
+    <!-- end  -->
+
+    <!--华为云配置 start  -->
+    <dependency>
+      <groupId>com.huawei.sis</groupId>
+      <artifactId>huaweicloud-java-sdk-sis</artifactId>
+      <version>1.7.2</version>
+    </dependency>
+    <!-- end  -->
+
+    <!--腾讯云配置 start  -->
+    <dependency>
+      <groupId>com.tencentcloudapi</groupId>
+      <artifactId>tencentcloud-sdk-java-asr</artifactId>
+      <version>3.1.526</version>
+    </dependency>
+    <!-- end -->
+
+    <!--科大讯飞云配置 start  -->
+    <dependency>
+      <groupId>com.xf</groupId>
+      <artifactId>lfasr-sdk</artifactId>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/lfasr-sdk-3.0.1.jar</systemPath>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.80</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.5</version>
+    </dependency>
+    <!-- end  -->
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>sis-repo</id>
+      <name>Sis Release Repository</name>
+      <url>https://mirrors.huaweicloud.com/repository/maven/huaweicloudsdk</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <!--<repository>
+      <id>tx-repo</id>
+      <name>tencent maven mirror</name>
+      <url>https://mirrors.tencent.com/nexus/repository/maven-public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>-->
+  </repositories>
+
+</project>
